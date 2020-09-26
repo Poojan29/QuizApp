@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Quizzer</string>
+    <string name="email">Email-ID</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign-Up</string>
+    <string name="or">OR</string>
+    <string name="username">Username</string>
+    <string name="welcome">Welcome</string>
+    <string name="new_user">New User?</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="about_us">About Us</string>
+    <string name="logout">Logout</string>
+    <string name="hello">Hello</string>
+    <string name="profile">Profile</string>
+    <string name="general_knowledge">General Knowledge</string>
+    <string name="_1_10">1/10</string>
+    <string name="score_0">Score: 0</string>
+    <string name="timer_20">Timer: 20</string>
+    <string name="questions">Questions</string>
+    <string name="radiobutton">Radiobutton</string>
+    <string name="next">Next</string>
+    <string name="_15">15</string>
+    <string name="time">Time :</string>
+    <string name="_0">0</string>
+    <string name="score">Score :</string>
+</resources>
