@@ -13,19 +13,31 @@
         android:paddingTop="10dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/quecount"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/_1_10"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:padding="6dp"
-            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal">
 
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_questions"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:padding="6dp" />
+
+            <TextView
+                android:id="@+id/quecount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_0"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:padding="6dp"/>
+
+        </LinearLayout>
 
 
         <LinearLayout
@@ -170,12 +182,10 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="90dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:text="@string/next"
         android:textAllCaps="false" />
-
-
 
 
 </LinearLayout>

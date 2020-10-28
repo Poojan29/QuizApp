@@ -12,7 +12,7 @@
     <string name="about_us">About Us</string>
     <string name="logout">Logout</string>
     <string name="hello">Hello</string>
-    <string name="profile">Profile</string>
+    <string name="profile">PROFILE</string>
     <string name="general_knowledge">General Knowledge</string>
     <string name="_1_10">1/10</string>
     <string name="score_0">Score: 0</string>
@@ -24,4 +24,7 @@
     <string name="time">Time :</string>
     <string name="_0">0</string>
     <string name="score">Score :</string>
+    <string name="logo">logo</string>
+    <string name="total_questions">Total Questions:</string>
+    <string name="profileimg">ProfileImg</string>
 </resources>

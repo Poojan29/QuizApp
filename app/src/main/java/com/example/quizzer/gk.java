@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,13 +25,15 @@ import com.google.firebase.database.ValueEventListener;
 
 public class gk extends AppCompatActivity {
 
-    TextView questions, scorecount, timecount;
+    TextView questions, scorecount, timecount, totalqueCount;
     MaterialButton next;
     DatabaseReference reference;
     RadioGroup radioGroup;
     RadioButton radioButton1, radioButton2, radioButton3, radioButton4,selectedAns;
     String Correctans;
+    int totalquestions;
     int Score = 0;
+
     CountDownTimer countDownTimer;
     final int[] total = {0};
 
@@ -48,23 +51,25 @@ public class gk extends AppCompatActivity {
         radioButton4 = findViewById(R.id.radiobtn4);
         scorecount = findViewById(R.id.scorecount);
         timecount = findViewById(R.id.timercount);
+        totalqueCount = findViewById(R.id.quecount);
 
         reference  = FirebaseDatabase.getInstance().getReference().child("questions");
 
         getQuestion(total[0]);
 
         startTimer();
+        getTotalQuestion();
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 int selectedid = radioGroup.getCheckedRadioButtonId();
-                selectedAns = (RadioButton)findViewById(selectedid);
+                selectedAns = findViewById(selectedid);
                 if (selectedid==-1){
+
                     Toast.makeText(gk.this, "Nothing selected", Toast.LENGTH_SHORT).show();
                 }else{
-
                     if (selectedAns.getText().toString().equals(Correctans)){
                         Toast.makeText(gk.this, "Correct", Toast.LENGTH_SHORT).show();
                         Score++;
@@ -73,12 +78,12 @@ public class gk extends AppCompatActivity {
                         Toast.makeText(gk.this, "Wrong", Toast.LENGTH_SHORT).show();
                     }
                     total[0]++;
-                    countDownTimer.start();
-
+                    getQuestion(total[0]);
                 }
+
                 //Toast.makeText(gk.this,"Button Clicked",Toast.LENGTH_SHORT).show();
                 //total[0]++;
-                getQuestion(total[0]);
+
                 radioGroup.clearCheck();
             }
         });
@@ -94,17 +99,18 @@ public class gk extends AppCompatActivity {
             public void onFinish() {
                 total[0]++;
                 getQuestion(total[0]++);
-                countDownTimer.start();
             }
         };
-        countDownTimer.start();
+
     }
 
     public void getQuestion(final int total) {
 
         reference.child(Integer.toString(total)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
+
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 if (snapshot.exists()) {
                     String que = snapshot.child("question").getValue().toString();
                     String option1 = snapshot.child("option1").getValue().toString();
@@ -112,15 +118,20 @@ public class gk extends AppCompatActivity {
                     String option3 = snapshot.child("option3").getValue().toString();
                     String option4 = snapshot.child("option4").getValue().toString();
                     Correctans = snapshot.child("correct_answer").getValue().toString();
+                    //totalquestions = (int) snapshot.getChildrenCount();
 
                     // list.add(new QuestionData(que,option1, option2, option3, option4, Correctans));
                     Log.i("MSG", que);
 
+                    //totalqueCount.setText(totalquestions);
+                    //Log.i("Total", String.valueOf(totalqueCount));
                     questions.setText(que);
                     radioButton1.setText(option1);
                     radioButton2.setText(option2);
                     radioButton3.setText(option3);
                     radioButton4.setText(option4);
+
+                    countDownTimer.start();
                 }
                 else {
                     countDownTimer.cancel();
@@ -136,6 +147,28 @@ public class gk extends AppCompatActivity {
             }
         });
     }
+
+    public void getTotalQuestion(){
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    int totalquetionnumber = (int) snapshot.getChildrenCount();
+                    totalqueCount.setText(Integer.toString(totalquetionnumber));
+                    Log.i("Total", Integer.toString(totalquetionnumber));
+                    totalquestions = totalquetionnumber;
+                }else{
+                    totalqueCount.setText("0");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 
     public void onBackPressed() {
         AlertDialog.Builder alert = new AlertDialog.Builder(this)
