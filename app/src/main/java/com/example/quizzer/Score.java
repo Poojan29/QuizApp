@@ -22,13 +22,15 @@ public class Score extends AppCompatActivity {
         home = findViewById(R.id.home);
         score = findViewById(R.id.score);
 
-        String score_str = getIntent().getStringExtra("Score");
-        score.setText(score_str);
+        Bundle bundle = getIntent().getExtras();
+        String Score = bundle.getString("Score", "0");
+        score.setText(Score);
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                finish();
             }
         });
 

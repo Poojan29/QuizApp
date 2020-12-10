@@ -67,7 +67,6 @@ public class gk extends AppCompatActivity {
                 int selectedid = radioGroup.getCheckedRadioButtonId();
                 selectedAns = findViewById(selectedid);
                 if (selectedid==-1){
-
                     Toast.makeText(gk.this, "Nothing selected", Toast.LENGTH_SHORT).show();
                 }else{
                     if (selectedAns.getText().toString().equals(Correctans)){
@@ -135,9 +134,12 @@ public class gk extends AppCompatActivity {
                 }
                 else {
                     countDownTimer.cancel();
-//                    Intent intent = new Intent(gk.this, Score.class);
-//                    //intent.putExtra("Score", scorecount);
-//                    startActivity(intent);
+
+                    Intent intent = new Intent(gk.this, Score.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Score", String.valueOf(Score));
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                     finish();
                 }
             }
