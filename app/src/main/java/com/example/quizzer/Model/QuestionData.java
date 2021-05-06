@@ -1,4 +1,4 @@
-package com.example.quizzer;
+package com.example.quizzer.Model;
 
 public class QuestionData {
 

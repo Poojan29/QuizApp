@@ -1,16 +1,16 @@
-package com.example.quizzer;
+package com.example.quizzer.Activities;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.Toast;
-
+import com.example.quizzer.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -59,7 +59,7 @@ public class Register extends AppCompatActivity {
                 final String pass = npass.getText().toString().trim();
                 final String users = nuser.getText().toString();
 
-                if (name.isEmpty()){
+                if (name.isEmpty()) {
                     Snackbar.make(constraintLayout, "Please enter your Username.", Snackbar.LENGTH_SHORT)
                             .setAction("Close", new View.OnClickListener() {
                                 @Override
@@ -69,7 +69,7 @@ public class Register extends AppCompatActivity {
                             }).show();
                     return;
                 }
-                if (email.isEmpty()){
+                if (email.isEmpty()) {
                     Snackbar.make(constraintLayout, "Please enter your Email.", Snackbar.LENGTH_SHORT)
                             .setAction("Close", new View.OnClickListener() {
                                 @Override
@@ -79,7 +79,7 @@ public class Register extends AppCompatActivity {
                             }).show();
                     return;
                 }
-                if (pass.length()<=6){
+                if (pass.length() < 6) {
                     Snackbar.make(constraintLayout, "Your password must be contain 6 characters.", Snackbar.LENGTH_SHORT)
                             .setAction("Close", new View.OnClickListener() {
                                 @Override
@@ -88,7 +88,7 @@ public class Register extends AppCompatActivity {
                                 }
                             }).show();
 
-                }else {
+                } else {
                     nprogressBar.setVisibility(View.VISIBLE);
                     mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -104,19 +104,18 @@ public class Register extends AppCompatActivity {
                                 documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Log.d("Code", "User profile is created for "+userID);
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Log.d("Code", "onFailure: "+e.toString());
+                                        Toast.makeText(Register.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
 
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                 finish();
                             } else {
-                                Toast.makeText(Register.this, "Error!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Register.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 nprogressBar.setVisibility(View.GONE);
                             }
                         }

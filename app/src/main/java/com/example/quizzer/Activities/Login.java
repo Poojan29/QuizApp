@@ -1,8 +1,4 @@
-package com.example.quizzer;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
+package com.example.quizzer.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +8,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.example.quizzer.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
@@ -30,6 +31,7 @@ public class Login extends AppCompatActivity {
     ProgressBar progressBar;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
+    FirebaseAuth firebaseAuth;
 
 
     @Override
@@ -42,14 +44,22 @@ public class Login extends AppCompatActivity {
         nlogin = findViewById(R.id.loginbtn1);
         nsignup = findViewById(R.id.signupbtn1);
         forgot = findViewById(R.id.forgottext);
-        constraintLayout  = findViewById(R.id.loginCon);
+        constraintLayout = findViewById(R.id.loginCon);
         mAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar1);
+        firebaseAuth = FirebaseAuth.getInstance();
 
-        pref = getApplicationContext().getSharedPreferences("email",0);
+        pref = getApplicationContext().getSharedPreferences("email", 0);
         editor = pref.edit();
 
 
+        if (firebaseAuth.getCurrentUser() != null) {
+            Toast.makeText(this, "You are already logged in.", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+        } else {
+
+        }
 
 
         nlogin.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +77,7 @@ public class Login extends AppCompatActivity {
                             }).show();
                     return;
                 }
-                if (pass.length() <= 6) {
+                if (pass.length() < 6) {
                     Snackbar.make(constraintLayout, "Please enter your Password.", Snackbar.LENGTH_SHORT)
                             .setAction("Close", new View.OnClickListener() {
                                 @Override

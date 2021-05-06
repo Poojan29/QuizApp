@@ -5,9 +5,10 @@
         <item name="colorPrimary">@color/colorPrimaryDark</item>
         <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/black</item>
+        <item name="fontFamily">@font/heebo</item>
     </style>
     <style name="RadioButton" parent="Theme.AppCompat.Light">
-        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
 
     </style>
 

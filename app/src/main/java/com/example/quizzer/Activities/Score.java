@@ -1,11 +1,12 @@
-package com.example.quizzer;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.quizzer.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.quizzer.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -22,14 +23,13 @@ public class Score extends AppCompatActivity {
         home = findViewById(R.id.home);
         score = findViewById(R.id.score);
 
-        Bundle bundle = getIntent().getExtras();
-        String Score = bundle.getString("Score", "0");
+        String Score = getIntent().getStringExtra("Score");
         score.setText(Score);
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
             }
         });

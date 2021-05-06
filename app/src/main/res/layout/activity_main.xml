@@ -4,52 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@drawable/background"
+    tools:context=".Activities.MainActivity">
 
-    <LinearLayout
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/colorPrimaryDark"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="10dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.001">
-
-        <LinearLayout
-            android:clickable="true"
-            android:id="@+id/gklinear"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:background="@drawable/edit_field"
-            android:focusable="true">
-
-            <ImageView
-                android:contentDescription="@string/logo"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/gk_icon"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/general_knowledge"
-                android:textSize="25sp"
-                android:layout_gravity="center_vertical"
-                android:paddingStart="15sp"
-                android:paddingEnd="15sp"
-                android:textColor="@color/colorPrimaryDark"/>
-
-
-
-        </LinearLayout>
-
-
-    </LinearLayout>
+        tools:ignore="MissingConstraints"
+        tools:listitem="@layout/single_row_layout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
